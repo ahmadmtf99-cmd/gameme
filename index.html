@@ -1,7 +1,8 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- ===== HEAD STARTS ===== -->
 <head>
   <meta charset="UTF-8">
   <title>Simple Click Game</title>
@@ -9,84 +10,172 @@
 
  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6649083955354692"
      crossorigin="anonymous"></script>
+
   <style>
+    /* ===== BODY & BACKGROUND ===== */
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
       text-align: center;
-      padding: 40px;
+      padding: 30px;
+      margin: 0;
     }
 
-    header {
-      margin-bottom: 30px;
+    h1 {
+      color: #fff;
+      text-shadow: 2px 2px #000;
     }
 
+    /* ===== GAME BOX ===== */
     .game-box {
-      background: white;
+      background: #fff;
       padding: 30px;
       max-width: 400px;
-      margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      position: relative;
     }
 
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
+    /* ===== TARGET BUTTON ===== */
+    #target {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #ff7e5f, #feb47b);
+      border-radius: 50%;
+      border: none;
+      font-size: 20px;
+      color: #fff;
       cursor: pointer;
-      margin-top: 20px;
+      position: absolute;
+      top: 50px;
+      left: 150px;
+      transition: transform 0.2s;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
 
+    #target:hover {
+      transform: scale(1.2);
+    }
+
+    /* ===== SCORE & TIMER ===== */
+    .info {
+      font-size: 20px;
+      margin: 15px 0;
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       margin-top: 40px;
       font-size: 14px;
+      color: #333;
     }
 
     footer a {
-      margin: 0 10px;
       text-decoration: none;
+      margin: 0 10px;
       color: #333;
+    }
+
+    /* ===== AD PLACEHOLDER ===== */
+    .ad-box {
+      margin: 20px auto;
+      max-width: 400px;
+      min-height: 60px;
+      background: #ddd;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #555;
     }
   </style>
 </head>
-<!-- ===== HEAD ENDS ===== -->
-
 <body>
 
-  <header>
-    <h1>🎮 Simple Click Game</h1>
-    <p>Click the button to increase your score!</p>
-  </header>
+  <h1>🎯 Super Clicker Game</h1>
+  <p>Click the target as fast as you can! 🔥</p>
 
   <div class="game-box">
-    <h2>Score: <span id="score">0</span></h2>
-    <button onclick="increaseScore()">CLICK ME</button>
+    <div class="info">Score: <span id="score">0</span></div>
+    <div class="info">Time Left: <span id="time">30</span>s</div>
+    <button id="target" onclick="hitTarget()">Click me!</button>
   </div>
 
+  <!-- 🔴 PLACE FOR ADS (AFTER ADSENSE APPROVAL) -->
+  <div class="ad-box">
+    Your Ad Here
+    <body>
+  ...
+  <!-- Ad unit -->
   <ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-YOUR_ID"
-     data-ad-slot="AD_SLOT_ID"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+       style="display:block"
+       data-ad-client="ca-pub-XXXXXXXX"
+       data-ad-slot="YYYYYYYY"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</body>
 
+  </div>
+
+  <footer>
+    <a href="#about">About</a> | 
+    <a href="#privacy">Privacy Policy</a>
+    <p>© 2026 Super Clicker Game</p>
+  </footer>
 
   <!-- ===== GAME SCRIPT ===== -->
   <script>
     let score = 0;
-    function increaseScore() {
-      score++;
-      document.getElementById("score").textContent = score;
+    let time = 30;
+    let gameInterval;
+
+    const target = document.getElementById('target');
+    const scoreSpan = document.getElementById('score');
+    const timeSpan = document.getElementById('time');
+
+    // Move target randomly
+    function moveTarget() {
+      const boxWidth = 400 - 100; // container width - target width
+      const boxHeight = 200 - 100; // container height - target height
+      const x = Math.random() * boxWidth;
+      const y = Math.random() * boxHeight;
+      target.style.left = x + "px";
+      target.style.top = y + "px";
     }
+
+    function hitTarget() {
+      score++;
+      scoreSpan.textContent = score;
+      moveTarget();
+    }
+
+    function startGame() {
+      gameInterval = setInterval(() => {
+        if(time > 0){
+          time--;
+          timeSpan.textContent = time;
+        } else {
+          clearInterval(gameInterval);
+          target.disabled = true;
+          alert("Time's up! Your score: " + score);
+        }
+      }, 1000);
+    }
+
+    // Start game automatically
+    startGame();
+    moveTarget();
   </script>
-x
-  <!-- ===== ABOUT & PRIVACY SECTIONS ===== -->
+
+  <!-- ===== ABOUT & PRIVACY ===== -->
   <section id="about" style="margin-top:50px;">
-    <h2>About This Website</h2>
-    <p>This is a simple click game created for fun and learning purposes.</p>
+    <h2>About This Game</h2>
+    <p>This is a simple clicker game created for fun and learning purposes. Try to click the target as many times as you can in 30 seconds!</p>
   </section>
 
   <section id="privacy" style="margin-top:50px;">
