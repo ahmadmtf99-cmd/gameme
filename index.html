@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Click Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- AdSense code goes here AFTER approval -->
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+    header {
+      margin-bottom: 30px;
+    }
+    .game-box {
+      background: white;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+    }
+    footer a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎮 Simple Click Game</h1>
+  <p>Click the button and increase your score!</p>
+</header>
+
+<div class="game-box">
+  <h2>Score: <span id="score">0</span></h2>
+  <button onclick="increaseScore()">CLICK ME</button>
+</div>
+
+<footer>
+  <a href="about.html">About</a>
+  <a href="privacy.html">Privacy Policy</a>
+</footer>
+
+<script src="game.js"></script>
+
+</body>
+</html>
